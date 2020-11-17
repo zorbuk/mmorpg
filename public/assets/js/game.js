@@ -216,6 +216,8 @@ class WorldScene extends Phaser.Scene {
     this.weapon.setSize(8, 8);
     this.physics.world.enable(this.weapon);
 
+    this.player.dammage = 1;
+
     this.container.add(this.weapon);
     this.attacking = false;
 
@@ -253,6 +255,7 @@ class WorldScene extends Phaser.Scene {
       const location = this.getValidLocation();
       // parameters are x, y, width, height
       var enemy = this.spawns.create(location.x, location.y, this.getEnemySprite());
+      enemy.hitpoints = Math.floor((Math.random() * 4) + 1);
       enemy.body.setCollideWorldBounds(true);
       enemy.body.setImmovable();
     }
@@ -319,9 +322,13 @@ class WorldScene extends Phaser.Scene {
 
   onMeetEnemy(player, enemy) {
     if (this.attacking) {
-      const location = this.getValidLocation();
-      enemy.x = location.x;
-      enemy.y = location.y;
+      if(enemy.hitpoints<=0){
+        const location = this.getValidLocation();
+        enemy.x = location.x;
+        enemy.y = location.y;
+      }else{
+        enemy.hitpoints -= Math.floor(Math.random() * player.dammage);
+      }
     }
   }
 
