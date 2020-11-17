@@ -324,13 +324,14 @@ class WorldScene extends Phaser.Scene {
 
   onMeetEnemy(player, enemy) {
     if (this.attacking) {
+      console.log(`${enemy}`)
+
       if(enemy.stats.hitpoints <= 0){
         const location = this.getValidLocation();
         enemy.x = location.x;
         enemy.y = location.y;
       }else{
         enemy.stats.hitpoints -= Math.floor((Math.random() * 2) + 1);
-        console.log(`remaining enemy hp ${enemy.stats.hitpoints}`)
       }
     }
   }
