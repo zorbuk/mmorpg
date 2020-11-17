@@ -216,7 +216,7 @@ class WorldScene extends Phaser.Scene {
     this.weapon.setSize(8, 8);
     this.physics.world.enable(this.weapon);
 
-    this.player.dammage = 1;
+    this.dammage = 1;
 
     this.container.add(this.weapon);
     this.attacking = false;
@@ -251,7 +251,7 @@ class WorldScene extends Phaser.Scene {
     this.spawns = this.physics.add.group({
       classType: Phaser.GameObjects.Sprite
     });
-    this.spawns.hitpoints = 4;
+    this.hitpoints = 5;
     for (var i = 0; i < 20; i++) {
       const location = this.getValidLocation();
       // parameters are x, y, width, height
@@ -324,12 +324,12 @@ class WorldScene extends Phaser.Scene {
     if (this.attacking) {
       console.log(`${JSON.stringify(enemy)} dammage: ${enemy.hitpoints}`)
 
-      if(enemy.stats.hitpoints <= 0){
+      if(enemy.hitpoints <= 0){
         const location = this.getValidLocation();
         enemy.x = location.x;
         enemy.y = location.y;
       }else{
-        enemy.stats.hitpoints -= Math.floor((Math.random() * 2) + 1);
+        enemy.hitpoints -= Math.floor((Math.random() * player.dammage) + 1);
       }
     }
   }
