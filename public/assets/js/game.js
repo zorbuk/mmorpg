@@ -327,7 +327,7 @@ class WorldScene extends Phaser.Scene {
         enemy.x = location.x;
         enemy.y = location.y;
       }else{
-        enemy.hitpoints -= Math.floor(Math.random() * player.dammage);
+        enemy.hitpoints -= Math.floor((Math.random() * player.dammage) + 1);
       }
     }
   }
