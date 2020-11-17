@@ -1,6 +1,6 @@
 const inputMessage = document.getElementById('inputMessage');
 const messages = document.getElementById('messages');
-const enemyStats = require('enemyStats')
+const enemyStats = require('assets/js/entities/enemyStats')
 
 window.addEventListener('keydown', event => {
   if (event.which === 13) {
