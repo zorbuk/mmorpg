@@ -1,6 +1,5 @@
 const inputMessage = document.getElementById('inputMessage');
 const messages = document.getElementById('messages');
-const enemyStats = require('assets/js/entities/enemyStats')
 
 window.addEventListener('keydown', event => {
   if (event.which === 13) {
@@ -248,7 +247,8 @@ class WorldScene extends Phaser.Scene {
   createEnemies() {
     // where the enemies will be
     this.spawns = this.physics.add.group({
-      classType: Phaser.GameObjects.Sprite
+      classType: Phaser.GameObjects.Sprite,
+      hitpoints: 20
     });
     for (var i = 0; i < 20; i++) {
       const location = this.getValidLocation();
@@ -322,7 +322,7 @@ class WorldScene extends Phaser.Scene {
     // CREATE ENEMY AND PLAYER MODEL, GET STATS
 
     if (this.attacking) {
-        console.log(`Enemy hitpoints: ${enemyStats[enemy.textureKey].hitpoints}`)
+        console.log(`Enemy hitpoints: ${enemy.hitpoints}`)
 
         const location = this.getValidLocation();
         enemy.x = location.x;
