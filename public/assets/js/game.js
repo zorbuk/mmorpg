@@ -230,9 +230,19 @@ class WorldScene extends Phaser.Scene {
   }
 
   addOtherPlayers(playerInfo) {
-    const otherPlayer = this.add.sprite(playerInfo.x, playerInfo.y, 'player', 9);
-    otherPlayer.setTint(Math.random() * 0xffffff);
+    const otherPlayer = this.add.sprite(playerInfo.x, playerInfo.y, 'player', 6);
+    otherPlayer.weapon = this.add.sprite(10, 0, 'sword');
+    otherPlayer.weapon.setScale(0.5);
+    otherPlayer.weapon.setSize(8, 8);
+    otherPlayer.physics.world.enable(this.weapon);
+
+    otherPlayer.container.add(this.weapon);
+    otherPlayer.attacking = false;
+
+    //otherPlayer.setTint(Math.random() * 0xffffff);
     otherPlayer.playerId = playerInfo.playerId;
+    
+    otherPlayer.physics.add.collider(otherPlayer, this.otherPlayers);
     this.otherPlayers.add(otherPlayer);
   }
 
