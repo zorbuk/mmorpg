@@ -1,5 +1,6 @@
 const inputMessage = document.getElementById('inputMessage');
 const messages = document.getElementById('messages');
+const enemyStats = require('enemyStats')
 
 window.addEventListener('keydown', event => {
   if (event.which === 13) {
@@ -216,8 +217,6 @@ class WorldScene extends Phaser.Scene {
     this.weapon.setSize(8, 8);
     this.physics.world.enable(this.weapon);
 
-    this.player.dammage = 1;
-
     this.container.add(this.weapon);
     this.attacking = false;
 
@@ -255,7 +254,6 @@ class WorldScene extends Phaser.Scene {
       const location = this.getValidLocation();
       // parameters are x, y, width, height
       var enemy = this.spawns.create(location.x, location.y, this.getEnemySprite());
-      enemy.body.hitpoints = 5;
       enemy.body.setCollideWorldBounds(true);
       enemy.body.setImmovable();
     }
@@ -321,16 +319,14 @@ class WorldScene extends Phaser.Scene {
   }
 
   onMeetEnemy(player, enemy) {
-    if (this.attacking) {
-      console.log(`${JSON.stringify(enemy)} dammage: ${enemy.hitpoints}`)
+    // CREATE ENEMY AND PLAYER MODEL, GET STATS
 
-      if(enemy.hitpoints <= 0){
+    if (this.attacking) {
+        console.log(`Enemy hitpoints: ${enemyStats[enemy.textureKey].hitpoints}`)
+
         const location = this.getValidLocation();
         enemy.x = location.x;
         enemy.y = location.y;
-      }else{
-        enemy.hitpoints -= Math.floor((Math.random() * player.dammage) + 1);
-      }
     }
   }
 
