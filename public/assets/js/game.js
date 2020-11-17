@@ -251,13 +251,11 @@ class WorldScene extends Phaser.Scene {
     this.spawns = this.physics.add.group({
       classType: Phaser.GameObjects.Sprite
     });
+    this.spawns.hitpoints = 4;
     for (var i = 0; i < 20; i++) {
       const location = this.getValidLocation();
       // parameters are x, y, width, height
-      var stats = {
-        hitpoints: Math.floor((Math.random() * 4) + 1)
-      }
-      var enemy = this.spawns.create(location.x, location.y, this.getEnemySprite(), stats);
+      var enemy = this.spawns.create(location.x, location.y, this.getEnemySprite());
       enemy.body.setCollideWorldBounds(true);
       enemy.body.setImmovable();
     }
@@ -324,7 +322,7 @@ class WorldScene extends Phaser.Scene {
 
   onMeetEnemy(player, enemy) {
     if (this.attacking) {
-      console.log(`${JSON.stringify(enemy)}`)
+      console.log(`${JSON.stringify(enemy)} dammage: ${enemy.hitpoints}`)
 
       if(enemy.stats.hitpoints <= 0){
         const location = this.getValidLocation();
