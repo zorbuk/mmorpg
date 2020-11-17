@@ -328,6 +328,8 @@ class WorldScene extends Phaser.Scene {
         enemy.y = location.y;
       }else{
         enemy.hitpoints -= Math.floor((Math.random() * player.dammage) + 1);
+
+        console.log(`remaining enemy hp ${enemy.hitpoints}`)
       }
     }
   }
